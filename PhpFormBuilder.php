@@ -2,6 +2,8 @@
 
 // v 0.8.6
 
+namespace FormBuilder;
+
 class PhpFormBuilder {
 
 	// Stores all form inputs
@@ -254,7 +256,9 @@ class PhpFormBuilder {
 				'request_populate' => false
 			) );
 		}
-
+        /**
+         * Aqui se agregan los atributos a los elementos y se crear el HTML
+        **/
 		// Iterate through the input queue and add input HTML
 		foreach ( $this->inputs as $val ) :
 
@@ -361,6 +365,9 @@ class PhpFormBuilder {
 					$element = 'input';
 					$end .= ' type="' . $val['type'] . '" value="' . $val['value'] . '"';
 					$end .= $val['checked'] ? ' checked' : '';
+                    if(isset($val['placeholder'])){
+                        $end .= ' placeholder = ' . $val['placeholder'];
+                    }
 					$end .= $this->field_close();
 					break;
 
@@ -389,6 +396,7 @@ class PhpFormBuilder {
 			$attr .= $val['checked'] ? ' checked' : '';
 			$attr .= $val['required'] ? ' required' : '';
 
+
 			// Build the label
 			if ( ! empty( $label_html ) ) {
 				$field .= $label_html;
@@ -409,6 +417,7 @@ class PhpFormBuilder {
 					$field .= '
 					<' . $element . $id . ' name="' . $val['name'] . '"' . $min_max_range . $class . $attr . $end;
 				}
+
 			// Not a form element
 			} else {
 				$field .= $end;
