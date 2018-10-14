@@ -365,9 +365,7 @@ class PhpFormBuilder {
 					$element = 'input';
 					$end .= ' type="' . $val['type'] . '" value="' . $val['value'] . '"';
 					$end .= $val['checked'] ? ' checked' : '';
-                    if(isset($val['placeholder'])){
-                        $end .= ' placeholder = ' . $val['placeholder'];
-                    }
+                    $end .= $val['placeholder'] ? ' placeholder="'.$val['placeholder'].'"' : '';
 					$end .= $this->field_close();
 					break;
 
